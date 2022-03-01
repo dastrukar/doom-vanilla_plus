@@ -12,7 +12,7 @@ class VPChaingun : Chaingun replaces Chaingun
 			CHGG A 0 {
 				A_WeaponOffset(0, 35);
 				A_Quake(2, 2, 0, 32, "");
-				A_GunFlash();
+				A_GunFlash("Flash1");
 				A_PlaySound("weapons/chngun", CHAN_WEAPON);
 				A_FireBullets(5.6, 0, 1, 5, "BulletPuff");
 			}
@@ -20,9 +20,12 @@ class VPChaingun : Chaingun replaces Chaingun
 			CHGG A 1 A_WeaponOffset();
 			CHGG AA 1 A_SetPitch(pitch+0.25);
 
+			CHGG B 0 A_JumpIfNoAmmo(5);
+
 			CHGG B 0 {
 				A_WeaponOffset(0, 35);
 				A_Quake(2, 2, 0, 32, "");
+				A_GunFlash("Flash2");
 				A_PlaySound("weapons/chngun", CHAN_WEAPON);
 				A_FireBullets(5.6, 0, 1, 5, "BulletPuff");
 			}
@@ -33,8 +36,11 @@ class VPChaingun : Chaingun replaces Chaingun
 			CHGG B 0 A_ReFire();
 			Goto Ready;
 
-		Flash:
+		Flash1:
 			CHGF A 4 Bright A_Light1();
+			Goto LightDone;
+
+		Flash2:
 			CHGF B 4 Bright A_Light1();
 			Goto LightDone;
 	}
